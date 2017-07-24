@@ -9,13 +9,65 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
-  let sprite = SquareSprite()
+class GameScene: SKScene, SKPhysicsContactDelegate {
+    
+    let player = SquareSprite()
+    let fire = Fire()
+    
   override func didMove(to view: SKView) {
-    sprite.zPosition = 10
-    addChild(sprite)
+    
+    player.zPosition = 10
+    addChild(player)
+    
+    createPhysics()
+    
+    createFire()
   }
+    
+    func createFire() {
+        
+        fire.zPosition = 1
+        fire.position = CGPoint(x: 0, y: 0 - self.size.height / 2)
+        addChild(fire)
+    }
+    
+    func createPhysics() {
+        
+        physicsWorld.contactDelegate = self
+        
+        self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
+        physicsBody?.categoryBitMask = PhysicsCategory.boundary
+        physicsBody?.allowsRotation = false
+        physicsBody?.isDynamic = false
+        physicsBody?.restitution = 0
+        physicsBody?.friction = 0
+    }
 
+    func didBegin(_ contact: SKPhysicsContact) {
+        
+        guard let nodeA = contact.bodyA.node, let nodeB = contact.bodyB.node else {
+            
+            //Silliness like removing a node from a node tree before physics simulation is done will trigger this error
+            fatalError("Physics body without its node detected!")
+        }
+        
+        let mask = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
+        
+        switch mask {
+            
+            //Contact between player and a fire
+            case PhysicsCategory.player | PhysicsCategory.fire:
+                
+                if let _ = (contact.bodyA.categoryBitMask == PhysicsCategory.fire ? nodeA : nodeB) as? SKSpriteNode {
+                    player.burn()
+                }
+                
+            default:
+                //some unknown contact occurred
+                break
+        }
+    }
+    
   func touchDown(atPoint pos: CGPoint) {
 
   }
