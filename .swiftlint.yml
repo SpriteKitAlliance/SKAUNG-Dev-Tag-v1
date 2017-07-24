@@ -1,0 +1,27 @@
+enabled_rules:
+  - private_outlet
+  - empty_count
+  - vertical_whitespace
+  - overridden_super_call
+  - redundant_nil_coalesing
+  - closure_spacing
+  - valid_ibinspectable
+disabled_rules:
+  - trailing_whitespace
+  - statement_position
+  - closing_brace
+file_length:
+  warning: 250
+  error: 300
+function_body_length:
+  warning: 40
+  error: 80
+excluded:
+  - Carthage
+  - Pods
+variable_name:
+  excluded:
+    - id
+    - URL
+    - to
+    - vc
