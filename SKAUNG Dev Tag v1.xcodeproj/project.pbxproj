@@ -12,6 +12,8 @@
 		63158E5E1F26789700ECFEA9 /* Firin.sks in Resources */ = {isa = PBXBuildFile; fileRef = 63158E511F26789700ECFEA9 /* Firin.sks */; };
 		63AD69511F267A9600A9CF6D /* Fire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AD69501F267A9600A9CF6D /* Fire.swift */; };
 		63AD69531F267AAA00A9CF6D /* SquareSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AD69521F267AAA00A9CF6D /* SquareSprite.swift */; };
+		63F592941F26A2BC000EDDBB /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F592931F26A2BC000EDDBB /* Platform.swift */; };
+		63F592961F26A4DD000EDDBB /* Platform.sks in Resources */ = {isa = PBXBuildFile; fileRef = 63F592951F26A4DD000EDDBB /* Platform.sks */; };
 		BBA0AB861F264FB700D44F37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA0AB851F264FB700D44F37 /* AppDelegate.swift */; };
 		BBA0AB881F264FB700D44F37 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = BBA0AB871F264FB700D44F37 /* GameScene.sks */; };
 		BBA0AB8A1F264FB700D44F37 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = BBA0AB891F264FB700D44F37 /* Actions.sks */; };
@@ -29,6 +31,8 @@
 		63158E511F26789700ECFEA9 /* Firin.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Firin.sks; sourceTree = "<group>"; };
 		63AD69501F267A9600A9CF6D /* Fire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fire.swift; sourceTree = "<group>"; };
 		63AD69521F267AAA00A9CF6D /* SquareSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquareSprite.swift; sourceTree = "<group>"; };
+		63F592931F26A2BC000EDDBB /* Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
+		63F592951F26A4DD000EDDBB /* Platform.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Platform.sks; sourceTree = "<group>"; };
 		BBA0AB821F264FB700D44F37 /* SKAUNG Dev Tag v1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SKAUNG Dev Tag v1.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBA0AB851F264FB700D44F37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BBA0AB871F264FB700D44F37 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -75,6 +79,8 @@
 			children = (
 				63AD69501F267A9600A9CF6D /* Fire.swift */,
 				63AD69521F267AAA00A9CF6D /* SquareSprite.swift */,
+				63F592931F26A2BC000EDDBB /* Platform.swift */,
+				63F592951F26A4DD000EDDBB /* Platform.sks */,
 			);
 			path = Sprites;
 			sourceTree = "<group>";
@@ -156,7 +162,7 @@
 				TargetAttributes = {
 					BBA0AB811F264FB700D44F37 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = SYZ2B4B9CC;
+						DevelopmentTeam = LU8XR8Y9JS;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -184,6 +190,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63F592961F26A4DD000EDDBB /* Platform.sks in Resources */,
 				BBA0AB911F264FB700D44F37 /* Main.storyboard in Resources */,
 				BBA0AB881F264FB700D44F37 /* GameScene.sks in Resources */,
 				63158E5E1F26789700ECFEA9 /* Firin.sks in Resources */,
@@ -224,6 +231,7 @@
 				63AD69511F267A9600A9CF6D /* Fire.swift in Sources */,
 				63158E461F2671B200ECFEA9 /* configurations.swift in Sources */,
 				BBA0AB8E1F264FB700D44F37 /* GameViewController.swift in Sources */,
+				63F592941F26A2BC000EDDBB /* Platform.swift in Sources */,
 				BBA0AB861F264FB700D44F37 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,7 +355,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = SYZ2B4B9CC;
+				DEVELOPMENT_TEAM = LU8XR8Y9JS;
 				INFOPLIST_FILE = "SKAUNG Dev Tag v1/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.spritekitalliance.SKAUNG-Dev-Tag-v1";
@@ -361,7 +369,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = SYZ2B4B9CC;
+				DEVELOPMENT_TEAM = LU8XR8Y9JS;
 				INFOPLIST_FILE = "SKAUNG Dev Tag v1/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.spritekitalliance.SKAUNG-Dev-Tag-v1";

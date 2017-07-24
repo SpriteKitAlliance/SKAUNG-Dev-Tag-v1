@@ -12,6 +12,7 @@ class SquareSprite: SKSpriteNode, Updateable {
 
   private var currentTouch: UITouch?
   private var isBurning = false
+  var isJumping = false
   private var currentHoldTime: TimeInterval = 0
 
   private let powerPerTime: TimeInterval = 0.5
@@ -19,7 +20,9 @@ class SquareSprite: SKSpriteNode, Updateable {
   private let maxPowerLevel = 4
 
   private var textures = [SKTexture]()
-
+  var testBase: SKSpriteNode!
+    var platform: Platform?
+    
   init() {
     let texture = SKTexture(imageNamed: "ska-0")
 
@@ -32,6 +35,7 @@ class SquareSprite: SKSpriteNode, Updateable {
   }
 
   required init?(coder aDecoder: NSCoder) {
+    
     super.init(coder: aDecoder)
 
     color = SKColor(red:0.98, green:0.31, blue:0.31, alpha:1.0)
@@ -42,12 +46,17 @@ class SquareSprite: SKSpriteNode, Updateable {
   }
 
   private func setup() {
+    
     for index in 0..<4 {
       let texture = SKTexture(imageNamed: "ska-\(index)")
 
       textures.append(texture)
     }
 
+    testBase = SKSpriteNode(color: .clear, size: CGSize(width: self.size.width, height: 10))
+    testBase.position = CGPoint(x: 0, y: 0 - self.size.height / 2 + 5)
+    self.addChild(testBase)
+        
     setupPhysics()
   }
 
@@ -113,6 +122,14 @@ class SquareSprite: SKSpriteNode, Updateable {
   }
 
   private func jump() {
+    
+    platform = nil
+    isJumping = true
+    
+    self.run(SKAction.wait(forDuration: 0.1)) {
+        self.isJumping = false
+    }
+    
     switch powerLevel {
     case 0:
       print("0 triggered")
@@ -136,7 +153,9 @@ class SquareSprite: SKSpriteNode, Updateable {
 
       print("default triggered")
     }
-
+    
+    physicsBody?.affectedByGravity = true
+    
     powerLevel = 0
     currentHoldTime = 0
   }
@@ -151,6 +170,13 @@ class SquareSprite: SKSpriteNode, Updateable {
     }
   }
 
+    func stopMoving() {
+        
+        physicsBody?.affectedByGravity = false
+        physicsBody?.velocity = CGVector(dx: 0, dy: 0)
+        physicsBody?.applyImpulse(CGVector(dx: 0, dy: 0))
+    }
+    
   func update(deltaTime: TimeInterval) {
     if currentTouch != nil {
       currentHoldTime += deltaTime
@@ -164,4 +190,13 @@ class SquareSprite: SKSpriteNode, Updateable {
 
     updateSprite()
   }
+    
+    func movePlayerWithPlatform() {
+        
+        if platform != nil {
+            
+            let posX = self.scene?.convert((platform?.position)!, from: platform!).x
+            position.x = posX!
+        }
+    }
 }

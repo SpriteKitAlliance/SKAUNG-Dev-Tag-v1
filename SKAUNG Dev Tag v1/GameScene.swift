@@ -13,15 +13,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
   let player = SquareSprite()
   let fire = Fire()
-
+    private var platform1: Platform!
+    
   private var lastUpdate: TimeInterval = 0
-
+    private var updateTime: TimeInterval = 0
+    
   override func didMove(to view: SKView) {
     player.zPosition = 10
     addChild(player)
 
     createPhysics()
     createFire()
+    
+    createPlatforms()
   }
 
   func createFire() {
@@ -30,6 +34,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     addChild(fire)
   }
 
+    func createPlatforms() {
+        
+        if let platformReference = self.childNode(withName: "//platform1") as? SKReferenceNode {
+
+            if let platform1 = platformReference.childNode(withName: "//platform") as? Platform {
+                self.platform1 = platform1
+                
+                //patforms contain 7 spikes ...remember to 0 base your count
+                platform1.activate(spikesToActivate: [0, 6], waitDuration: 2)
+            }
+        }
+    }
+    
   func createPhysics() {
 
     physicsWorld.contactDelegate = self
@@ -43,7 +60,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     physicsBody?.friction = 0.0
   }
 
-  func didBegin(_ contact: SKPhysicsContact) {
+    func checkForCollisions() {
+        
+        guard player.platform == nil && !player.isJumping else { return }
+        
+        if player.testBase.intersects(platform1.platformTest) {
+
+            player.position.y = self.convert(platform1.position, from: platform1).y + platform1.size.height / 2 + player.size.height / 2
+            player.stopMoving()
+            player.platform = platform1
+        }
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
 
     guard let nodeA = contact.bodyA.node, let nodeB = contact.bodyB.node else {
 
@@ -97,8 +126,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   }
 
   override func update(_ currentTime: TimeInterval) {
+    
     var dt = currentTime - lastUpdate
-
+    var movementChecker = currentTime - updateTime
+    
     if dt > 1 {
       dt = 0
     }
@@ -107,6 +138,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
       (child as? Updateable)?.update(deltaTime: dt)
     }
 
+    checkForCollisions()
+    
+    //check if need to move player with platform but only check every 1/6 of a second not to oveload the process
+    
+    if movementChecker > 0.1 {
+        
+        movementChecker = currentTime
+        
+        if player.platform != nil {
+            player.movePlayerWithPlatform()
+        }
+    }
+    
     lastUpdate = currentTime
   }
 }
