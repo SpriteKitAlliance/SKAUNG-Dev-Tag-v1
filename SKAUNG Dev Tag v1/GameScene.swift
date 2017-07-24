@@ -10,64 +10,64 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-    
-    let player = SquareSprite()
-    let fire = Fire()
-    
+
+  let player = SquareSprite()
+  let fire = Fire()
+
+  private var lastUpdate: TimeInterval = 0
+
   override func didMove(to view: SKView) {
-    
     player.zPosition = 10
     addChild(player)
-    
+
     createPhysics()
-    
     createFire()
   }
-    
-    func createFire() {
-        
-        fire.zPosition = 1
-        fire.position = CGPoint(x: 0, y: 0 - self.size.height / 2)
-        addChild(fire)
-    }
-    
-    func createPhysics() {
-        
-        physicsWorld.contactDelegate = self
-        
-        self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
-        physicsBody?.categoryBitMask = PhysicsCategory.boundary
-        physicsBody?.allowsRotation = false
-        physicsBody?.isDynamic = false
-        physicsBody?.restitution = 0
-        physicsBody?.friction = 0
+
+  func createFire() {
+    fire.zPosition = 1
+    fire.position = CGPoint(x: -90, y: 0 - self.size.height / 2)
+    addChild(fire)
+  }
+
+  func createPhysics() {
+
+    physicsWorld.contactDelegate = self
+    physicsWorld.gravity = CGVector(dx: 0, dy: -20)
+
+    self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
+    physicsBody?.categoryBitMask = PhysicsCategory.boundary
+    physicsBody?.allowsRotation = false
+    physicsBody?.isDynamic = false
+    physicsBody?.restitution = 0.1
+    physicsBody?.friction = 0.0
+  }
+
+  func didBegin(_ contact: SKPhysicsContact) {
+
+    guard let nodeA = contact.bodyA.node, let nodeB = contact.bodyB.node else {
+
+      //Silliness like removing a node from a node tree before physics simulation is done will trigger this error
+      fatalError("Physics body without its node detected!")
     }
 
-    func didBegin(_ contact: SKPhysicsContact) {
-        
-        guard let nodeA = contact.bodyA.node, let nodeB = contact.bodyB.node else {
-            
-            //Silliness like removing a node from a node tree before physics simulation is done will trigger this error
-            fatalError("Physics body without its node detected!")
-        }
-        
-        let mask = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
-        
-        switch mask {
-            
-            //Contact between player and a fire
-            case PhysicsCategory.player | PhysicsCategory.fire:
-                
-                if let _ = (contact.bodyA.categoryBitMask == PhysicsCategory.fire ? nodeA : nodeB) as? SKSpriteNode {
-                    player.burn()
-                }
-                
-            default:
-                //some unknown contact occurred
-                break
-        }
+    let mask = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
+
+    switch mask {
+
+    //Contact between player and a fire
+    case PhysicsCategory.player | PhysicsCategory.fire:
+
+      if let _ = (contact.bodyA.categoryBitMask == PhysicsCategory.fire ? nodeA : nodeB) as? SKSpriteNode {
+        player.burn()
+      }
+
+    default:
+      //some unknown contact occurred
+      break
     }
-    
+  }
+
   func touchDown(atPoint pos: CGPoint) {
 
   }
@@ -97,6 +97,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
   }
 
   override func update(_ currentTime: TimeInterval) {
-    // Called before each frame is rendered
+    var dt = currentTime - lastUpdate
+
+    if dt > 1 {
+      dt = 0
+    }
+
+    for child in children where (child as? Updateable) != nil {
+      (child as? Updateable)?.update(deltaTime: dt)
+    }
+
+    lastUpdate = currentTime
   }
 }
