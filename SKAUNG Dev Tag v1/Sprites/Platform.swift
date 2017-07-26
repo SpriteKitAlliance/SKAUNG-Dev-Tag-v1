@@ -68,6 +68,31 @@ class Platform: SKSpriteNode {
         if let platformTest = self.childNode(withName: "platformTest") as? SKSpriteNode {
             self.platformTest = platformTest
         }
+        
+        if scene != nil {
+            
+            //5 seconds 400 pixels
+
+            var random = arc4random() % 6
+
+            let moveRight = SKAction.moveBy(x: 400, y: 0, duration: TimeInterval(random + 2))
+            let moveLeft = SKAction.moveBy(x: -400, y: 0, duration: TimeInterval(random + 2))
+            
+            random = arc4random() % 2
+            
+            let moveSequence: SKAction!
+            
+            if random == 0 {
+                moveSequence = SKAction.sequence([moveRight, moveLeft])
+
+            }else {
+                moveSequence = SKAction.sequence([moveLeft, moveRight])
+            }
+            
+            let repeatForever = SKAction.repeatForever(moveSequence)
+            run(repeatForever)
+        }
+        
     }
     
     func activate(spikesToActivate: [Int], waitDuration: Double) {

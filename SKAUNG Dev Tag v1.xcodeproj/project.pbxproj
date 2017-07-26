@@ -162,7 +162,7 @@
 				TargetAttributes = {
 					BBA0AB811F264FB700D44F37 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = LU8XR8Y9JS;
+						DevelopmentTeam = 5MPKL8W54X;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -355,7 +355,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = LU8XR8Y9JS;
+				DEVELOPMENT_TEAM = 5MPKL8W54X;
 				INFOPLIST_FILE = "SKAUNG Dev Tag v1/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.spritekitalliance.SKAUNG-Dev-Tag-v1";
@@ -369,7 +369,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = LU8XR8Y9JS;
+				DEVELOPMENT_TEAM = 5MPKL8W54X;
 				INFOPLIST_FILE = "SKAUNG Dev Tag v1/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.spritekitalliance.SKAUNG-Dev-Tag-v1";

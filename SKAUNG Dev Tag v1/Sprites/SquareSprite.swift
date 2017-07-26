@@ -97,14 +97,14 @@ class SquareSprite: SKSpriteNode, Updateable {
   }
 
   override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-    for touch in touches {
-      if currentTouch == touch && parent != nil, !frame.contains((currentTouch?.location(in: self))!) {
-        //Dragged out
-        jump()
-
-        currentTouch = nil
-      }
-    }
+//    for touch in touches {
+//      if currentTouch == touch && parent != nil, !frame.contains((currentTouch?.location(in: self.parent!))!) {
+//        //Dragged out
+//        jump()
+//
+//        currentTouch = nil
+//      }
+//    }
   }
 
   override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -123,12 +123,22 @@ class SquareSprite: SKSpriteNode, Updateable {
 
   private func jump() {
     
+    if platform != nil && scene != nil {
+        let pointerToScene = scene!
+        let convertedPoint = platform!.convert(position, to: scene!)
+        position = convertedPoint
+        removeFromParent()
+        pointerToScene.addChild(self)
+    }
+    
     platform = nil
     isJumping = true
     
     self.run(SKAction.wait(forDuration: 0.1)) {
         self.isJumping = false
     }
+    
+    physicsBody?.affectedByGravity = true
     
     switch powerLevel {
     case 0:
@@ -193,10 +203,10 @@ class SquareSprite: SKSpriteNode, Updateable {
     
     func movePlayerWithPlatform() {
         
-        if platform != nil {
-            
-            let posX = self.scene?.convert((platform?.position)!, from: platform!).x
-            position.x = posX!
-        }
+//        if platform != nil {
+//            
+//            let posX = self.scene?.convert((platform?.position)!, from: platform!).x
+//            position.x = posX!
+//        }
     }
 }
