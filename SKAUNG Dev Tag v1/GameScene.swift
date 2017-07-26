@@ -28,6 +28,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         createFire()
         
         createPlatforms()
+        
+        createCannons()
+    }
+    
+    func createCannons(){
+        let cannon = Cannon()
+        cannon.position = CGPoint(x: frame.minX + cannon.frame.size.width, y: frame.maxY - cannon.frame.size.height)
+        addChild(cannon)
+        cannon.set(range: 170, to: 270)
+        cannon.startShooting()
     }
     
     func createFire() {
