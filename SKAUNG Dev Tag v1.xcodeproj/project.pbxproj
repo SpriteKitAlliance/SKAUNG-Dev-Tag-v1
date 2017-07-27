@@ -12,6 +12,9 @@
 		63158E5E1F26789700ECFEA9 /* Firin.sks in Resources */ = {isa = PBXBuildFile; fileRef = 63158E511F26789700ECFEA9 /* Firin.sks */; };
 		63AD69511F267A9600A9CF6D /* Fire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AD69501F267A9600A9CF6D /* Fire.swift */; };
 		63AD69531F267AAA00A9CF6D /* SquareSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AD69521F267AAA00A9CF6D /* SquareSprite.swift */; };
+		63D5E9501F299F40002D739E /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D5E94F1F299F40002D739E /* Coin.swift */; };
+		63D5E9541F29ADBE002D739E /* Explodin.sks in Resources */ = {isa = PBXBuildFile; fileRef = 63D5E9531F29ADBE002D739E /* Explodin.sks */; };
+		63D5E9591F29B341002D739E /* coin.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 63D5E9581F29B341002D739E /* coin.mp3 */; };
 		63F592941F26A2BC000EDDBB /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F592931F26A2BC000EDDBB /* Platform.swift */; };
 		63F592961F26A4DD000EDDBB /* Platform.sks in Resources */ = {isa = PBXBuildFile; fileRef = 63F592951F26A4DD000EDDBB /* Platform.sks */; };
 		BBA0AB861F264FB700D44F37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA0AB851F264FB700D44F37 /* AppDelegate.swift */; };
@@ -33,6 +36,9 @@
 		63158E511F26789700ECFEA9 /* Firin.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Firin.sks; sourceTree = "<group>"; };
 		63AD69501F267A9600A9CF6D /* Fire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fire.swift; sourceTree = "<group>"; };
 		63AD69521F267AAA00A9CF6D /* SquareSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquareSprite.swift; sourceTree = "<group>"; };
+		63D5E94F1F299F40002D739E /* Coin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
+		63D5E9531F29ADBE002D739E /* Explodin.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explodin.sks; sourceTree = "<group>"; };
+		63D5E9581F29B341002D739E /* coin.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = coin.mp3; sourceTree = "<group>"; };
 		63F592931F26A2BC000EDDBB /* Platform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		63F592951F26A4DD000EDDBB /* Platform.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Platform.sks; sourceTree = "<group>"; };
 		BBA0AB821F264FB700D44F37 /* SKAUNG Dev Tag v1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SKAUNG Dev Tag v1.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,6 +70,7 @@
 		63158E491F26789700ECFEA9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				63D5E9551F29AEF9002D739E /* Sounds */,
 				63158E4A1F26789700ECFEA9 /* Particles */,
 			);
 			path = Resources;
@@ -74,6 +81,7 @@
 			children = (
 				63158E4B1F26789700ECFEA9 /* Assets.xcassets */,
 				63158E511F26789700ECFEA9 /* Firin.sks */,
+				63D5E9531F29ADBE002D739E /* Explodin.sks */,
 			);
 			path = Particles;
 			sourceTree = "<group>";
@@ -86,8 +94,17 @@
 				63F592931F26A2BC000EDDBB /* Platform.swift */,
 				63F592951F26A4DD000EDDBB /* Platform.sks */,
 				CF8EFC8A1F28B07100DC7BE6 /* Cannon.swift */,
+				63D5E94F1F299F40002D739E /* Coin.swift */,
 			);
 			path = Sprites;
+			sourceTree = "<group>";
+		};
+		63D5E9551F29AEF9002D739E /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				63D5E9581F29B341002D739E /* coin.mp3 */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 		BBA0AB791F264FB700D44F37 = {
@@ -168,7 +185,7 @@
 				TargetAttributes = {
 					BBA0AB811F264FB700D44F37 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 5NZ6YX2XLC;
+						DevelopmentTeam = LU8XR8Y9JS;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -197,11 +214,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				63F592961F26A4DD000EDDBB /* Platform.sks in Resources */,
+				63D5E9541F29ADBE002D739E /* Explodin.sks in Resources */,
 				BBA0AB911F264FB700D44F37 /* Main.storyboard in Resources */,
 				BBA0AB881F264FB700D44F37 /* GameScene.sks in Resources */,
 				63158E5E1F26789700ECFEA9 /* Firin.sks in Resources */,
 				BBA0AB931F264FB700D44F37 /* Assets.xcassets in Resources */,
 				BBA0AB961F264FB700D44F37 /* LaunchScreen.storyboard in Resources */,
+				63D5E9591F29B341002D739E /* coin.mp3 in Resources */,
 				63158E581F26789700ECFEA9 /* Assets.xcassets in Resources */,
 				BBA0AB8A1F264FB700D44F37 /* Actions.sks in Resources */,
 			);
@@ -240,6 +259,7 @@
 				63158E461F2671B200ECFEA9 /* configurations.swift in Sources */,
 				BBA0AB8E1F264FB700D44F37 /* GameViewController.swift in Sources */,
 				63F592941F26A2BC000EDDBB /* Platform.swift in Sources */,
+				63D5E9501F299F40002D739E /* Coin.swift in Sources */,
 				BBA0AB861F264FB700D44F37 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -363,7 +383,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5NZ6YX2XLC;
+				DEVELOPMENT_TEAM = LU8XR8Y9JS;
 				INFOPLIST_FILE = "SKAUNG Dev Tag v1/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -378,7 +398,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5NZ6YX2XLC;
+				DEVELOPMENT_TEAM = LU8XR8Y9JS;
 				INFOPLIST_FILE = "SKAUNG Dev Tag v1/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

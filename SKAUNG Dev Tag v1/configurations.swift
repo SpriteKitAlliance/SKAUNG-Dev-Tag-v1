@@ -16,4 +16,5 @@ struct PhysicsCategory {
     static let fire: UInt32 = 0x1 << 2
     static let platform: UInt32 = 0x1 << 3
     static let spike: UInt32 = 0x1 << 4
+    static let coin: UInt32 = 0x1 << 4
 }

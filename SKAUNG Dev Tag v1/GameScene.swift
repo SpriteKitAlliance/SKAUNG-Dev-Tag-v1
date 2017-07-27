@@ -19,6 +19,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var lastUpdate: TimeInterval = 0
     private var updateTime: TimeInterval = 0
     
+    private var coins: Int = 0
+    
     override func didMove(to view: SKView) {
         player.zPosition = 10
         addChild(player)
@@ -28,6 +30,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         createFire()
         
         createPlatforms()
+        
+        createCoins()
         
         createCannons()
     }
@@ -53,7 +57,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if let platform1 = platformReference.childNode(withName: "//platform") as? Platform {
     
                 for i in 0 ..< 4 {
+                    
                     if let newPlatform = platform1.copy() as? Platform {
+                        
                         print("Added new platform")
 //                        patforms contain 7 spikes ...remember to 0 base your count
                         newPlatform.position.y = CGFloat(-140 + i * 140)
@@ -68,6 +74,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 platforms.append(platform1)
             }
         }
+    }
+    
+    func createCoins() {
+        
+        generateCoin()
+        
+        let duration: Double = 18
+        let wait = SKAction.wait(forDuration: duration)
+        let generateCoinAction = SKAction.run { self.generateCoin() }
+        let sequence = SKAction.sequence([wait, generateCoinAction])
+        let repeater = SKAction.repeatForever(sequence)
+        self.run(repeater, withKey: "coins")
+    }
+    
+    func generateCoin() {
+        
+        print("added new Coin")
+        let randomX: CGFloat = 0 - self.size.width / 2 + CGFloat(arc4random_uniform(UInt32(self.size.width)))
+        print("randomX \(randomX)")
+        let randomPlatform = arc4random_uniform(UInt32(platforms.count))
+        let yPos = platforms[Int(randomPlatform)].position.y
+        print("yPos \(yPos)")
+        
+        let coin = Coin()
+        coin.position = CGPoint(x: randomX, y: CGFloat(yPos + 72))
+        coin.zPosition = 10
+        addChild(coin)
     }
     
     func createPhysics() {
@@ -103,6 +136,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    func gotCoin(_ coin: Coin) {
+        
+        coin.isGotten = true
+        coins += 1
+        
+        coin.explode()
+    }
+    
     func didBegin(_ contact: SKPhysicsContact) {
         
         guard let nodeA = contact.bodyA.node, let nodeB = contact.bodyB.node else {
@@ -115,16 +156,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         switch mask {
             
-        //Contact between player and a fire
-        case PhysicsCategory.player | PhysicsCategory.fire:
+            //Contact between player and a fire
+            case PhysicsCategory.player | PhysicsCategory.fire:
+                
+                if let _ = (contact.bodyA.categoryBitMask == PhysicsCategory.fire ? nodeA : nodeB) as? SKSpriteNode {
+                    player.burn()
+                }
             
-            if let _ = (contact.bodyA.categoryBitMask == PhysicsCategory.fire ? nodeA : nodeB) as? SKSpriteNode {
-                player.burn()
-            }
+            case PhysicsCategory.player | PhysicsCategory.coin:
+                
+              if let coinNode = (contact.bodyA.categoryBitMask == PhysicsCategory.coin ? nodeA : nodeB) as? SKSpriteNode {
+                    
+                    if let coin = coinNode as? Coin {
+                        
+                        if !coin.isGotten {
+                            gotCoin(coin)
+                        }
+                    }
+                }
             
-        default:
-            //some unknown contact occurred
-            break
+            default:
+                //some unknown contact occurred
+                break
         }
     }
     

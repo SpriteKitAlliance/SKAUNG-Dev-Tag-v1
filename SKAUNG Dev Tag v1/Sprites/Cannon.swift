@@ -8,20 +8,16 @@
 
 import SpriteKit
 
-
-
-class Cannon:SKSpriteNode {
+class Cannon: SKSpriteNode {
     
-    private var barrel:SKSpriteNode!
+    private var barrel: SKSpriteNode!
     private let bullet = SKSpriteNode(color: .white, size: CGSize(width:7, height:7))
     
     init() {
         let atlas = SKTextureAtlas(named: "Atlas")
         
         let standTexture = atlas.textureNamed("stand")
-        
-        
-        
+
         super.init(texture: standTexture, color: .clear, size: standTexture.size())
         
         //isUserInteractionEnabled = true
@@ -40,22 +36,21 @@ class Cannon:SKSpriteNode {
         
         setup()
     }
+    
     //in degrees
-    func set(range from:CGFloat, to:CGFloat){
-        
-        
+    func set(range from: CGFloat, to: CGFloat) {
         
         let rotateTo = SKAction.rotate(toAngle: to.degreesToRadians, duration: 1)
         let rotateFrom = SKAction.rotate(toAngle: from.degreesToRadians, duration: 1)
         
-        let sequence = SKAction.sequence([rotateTo,rotateFrom])
+        let sequence = SKAction.sequence([rotateTo, rotateFrom])
         
         let rotate = SKAction.repeatForever(sequence)
         
         run(rotate, withKey: "rotating")
     }
     
-    func startShooting(){
+    func startShooting() {
         let wait = SKAction.wait(forDuration: 0.2)
         let shoot = SKAction.run {
             [weak self] in
@@ -67,7 +62,7 @@ class Cannon:SKSpriteNode {
         run(SKAction.repeatForever(sequence), withKey: "shooting")
     }
     
-    private func shoot(){
+    private func shoot() {
         
         if let bullet = bullet.copy() as? SKSpriteNode {
             
@@ -75,18 +70,21 @@ class Cannon:SKSpriteNode {
             
             bullet.position = convert(bullet.position, to: scene!)
             
-            let speed:CGFloat = 0.5
+            let speed: CGFloat = 0.5
 
-            let dx = speed * cos (zRotation + CGFloat(M_PI_2))
-            let dy =  speed * sin (zRotation + CGFloat(M_PI_2))
+            let dx = speed * cos (zRotation + CGFloat(Double.pi / 2))
+            let dy =  speed * sin (zRotation + CGFloat(Double.pi / 2))
             
-            bullet.physicsBody?.applyImpulse(CGVector(dx:dx, dy:dy))
+            bullet.physicsBody?.applyImpulse(CGVector(dx: dx, dy: dy))
             
+            let wait = SKAction.wait(forDuration: 10.0)
+            let remove = SKAction.removeFromParent()
+            let seq = SKAction.sequence([wait, remove])
+            bullet.run(seq)
         }
     }
-   
-    
-    func setup(){
+
+    func setup() {
         
         let atlas = SKTextureAtlas(named: "Atlas")
         let barrelTexture = atlas.textureNamed("barrel")
@@ -102,6 +100,4 @@ class Cannon:SKSpriteNode {
         bullet.physicsBody?.collisionBitMask = 0
         
     }
-
-    
 }
