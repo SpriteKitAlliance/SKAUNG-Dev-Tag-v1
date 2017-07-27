@@ -63,7 +63,7 @@ class SquareSprite: SKSpriteNode, Updateable {
   private func setupPhysics() {
     self.physicsBody = SKPhysicsBody(rectangleOf: texture!.size())
     physicsBody!.categoryBitMask = PhysicsCategory.player
-    physicsBody!.contactTestBitMask = PhysicsCategory.fire
+    physicsBody!.contactTestBitMask = PhysicsCategory.fire | PhysicsCategory.coin
     physicsBody!.collisionBitMask = PhysicsCategory.boundary
     physicsBody!.allowsRotation = false
     physicsBody!.restitution = 0.2
