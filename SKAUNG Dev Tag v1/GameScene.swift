@@ -37,7 +37,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func createCannons(){
-        let cannon = Cannon()
+        let cannon = Cannon(config:BasicCannonConfiguration())
         cannon.position = CGPoint(x: frame.minX + cannon.frame.size.width, y: frame.maxY - cannon.frame.size.height)
         addChild(cannon)
         cannon.set(range: 170, to: 270)
