@@ -133,7 +133,7 @@ class Cannon: SKSpriteNode {
         
         
         if let emitter = (NSKeyedUnarchiver.unarchiveObject(withFile: emitterPath) as? SKEmitterNode) {
-            emitter.targetNode = node
+            emitter.targetNode = scene
             node.addChild(emitter)
            
         }
@@ -158,7 +158,7 @@ class Cannon: SKSpriteNode {
                 bullet.physicsBody?.applyImpulse(CGVector(dx: dx, dy: dy))
                 
                 let wait = SKAction.wait(forDuration: 10.0)
-                let remove = SKAction.removeFromParent()
+                let remove = SKAction.sequence([SKAction.fadeOut(withDuration: 0.2), SKAction.removeFromParent()])
                 let seq = SKAction.sequence([wait, remove])
                 bullet.run(seq)
  
