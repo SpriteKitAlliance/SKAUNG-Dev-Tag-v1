@@ -44,7 +44,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupLabels()
     }
     
-    func createCannons(){
+    func createCannons() {
+        
         let cannon = Cannon(config:BasicCannonConfiguration())
         cannon.position = CGPoint(x: frame.minX + cannon.frame.size.width, y: frame.maxY - cannon.frame.size.height)
         addChild(cannon)
@@ -53,6 +54,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func createFire() {
+        
         fire.zPosition = 1
         fire.position = CGPoint(x: -90, y: 0 - self.size.height / 2)
         addChild(fire)
