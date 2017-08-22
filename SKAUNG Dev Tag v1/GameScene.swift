@@ -13,13 +13,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let player = SquareSprite()
     let fire = Fire()
+    private var scoreLabel: SKLabelNode!
     
     private var platforms = [Platform]()
     
     private var lastUpdate: TimeInterval = 0
     private var updateTime: TimeInterval = 0
     
-    private var coins: Int = 0
+    private var coins: Int = 0 {
+        
+        didSet {
+            scoreLabel.text = String(coins)
+        }
+    }
     
     override func didMove(to view: SKView) {
         player.zPosition = 10
@@ -34,6 +40,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         createCoins()
         
         createCannons()
+        
+        setupLabels()
     }
     
     func createCannons(){
@@ -48,6 +56,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         fire.zPosition = 1
         fire.position = CGPoint(x: -90, y: 0 - self.size.height / 2)
         addChild(fire)
+    }
+    
+    func setupLabels() {
+        
+        if let scoreLabel = self.childNode(withName: "scoreLabel") as? SKLabelNode {
+            self.scoreLabel = scoreLabel
+        }
     }
     
     func createPlatforms() {
