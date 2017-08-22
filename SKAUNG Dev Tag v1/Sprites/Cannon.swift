@@ -46,11 +46,11 @@ struct BasicCannonConfiguration:CannonConfiguration {
      var  rotateTo: CGFloat = 360
      var  sightRadius: CGFloat = 200
      var  rotatingDuration: TimeInterval = 2
-    var fireRate:TimeInterval = 1.5
+     var  fireRate:TimeInterval = 1.5
 }
 
 struct AdvancedCannonConfiguration:CannonConfiguration {
-    
+
      var bulletSpeed: CGFloat = 4.5
      var rotateFrom: CGFloat = 0
      var rotateTo: CGFloat = 360
