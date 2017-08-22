@@ -13,13 +13,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let player = SquareSprite()
     let fire = Fire()
+    private var scoreLabel: SKLabelNode!
     
     private var platforms = [Platform]()
     
     private var lastUpdate: TimeInterval = 0
     private var updateTime: TimeInterval = 0
     
-    private var coins: Int = 0
+    private var coins: Int = 0 {
+        
+        didSet {
+            scoreLabel.text = String(coins)
+        }
+    }
     
     override func didMove(to view: SKView) {
         player.zPosition = 10
@@ -34,9 +40,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         createCoins()
         
         createCannons()
+        
+        setupLabels()
     }
     
-    func createCannons(){
+    func createCannons() {
+        
         let cannon = Cannon(config:BasicCannonConfiguration())
         cannon.position = CGPoint(x: frame.minX + cannon.frame.size.width, y: frame.maxY - cannon.frame.size.height)
         addChild(cannon)
@@ -45,9 +54,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func createFire() {
+        
         fire.zPosition = 1
         fire.position = CGPoint(x: -90, y: 0 - self.size.height / 2)
         addChild(fire)
+    }
+    
+    func setupLabels() {
+        
+        if let scoreLabel = self.childNode(withName: "scoreLabel") as? SKLabelNode {
+            self.scoreLabel = scoreLabel
+        }
     }
     
     func createPlatforms() {
